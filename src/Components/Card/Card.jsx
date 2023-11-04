@@ -1,9 +1,9 @@
 import React from "react";
 
-const Card = ({ user }) => {
+const Card = ({ dog }) => {
   return (
     <div>
-      <h1>{user.name}</h1>
+      <h1>{dog?.name}</h1>
     </div>
   );
 };
