@@ -1,9 +1,8 @@
 import React from "react";
 import Card from "../Card/Card";
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
-const Cards = ({ dogs }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const Cards = ({ dogs, currentPage, setCurrentPage }) => {
   const itemsPerPage = 8;
 
   const prev = () => {
@@ -29,7 +28,9 @@ const Cards = ({ dogs }) => {
       {dogs
         .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
         .map((dog, index) => (
-          <Card key={index} dog={dog} />
+          <NavLink key={index} to={`/detail/${dog.id}`}>
+            <Card key={index} dog={dog} />
+          </NavLink>
         ))}
     </div>
   );
