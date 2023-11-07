@@ -15,7 +15,6 @@ let initialState = {
   allDogs: [],
   copyDogs: [],
   detailDog: [],
-  searchDogs: [],
   temperaments: [],
 };
 

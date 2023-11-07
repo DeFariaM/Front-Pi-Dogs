@@ -1,0 +1,16 @@
+.temperaments {
+  background-color: aqua;
+  grid-column: auto;
+  height: 300px;
+  scroll-behavior: smooth;
+  overflow: scroll;
+  overflow-x: hidden;
+  justify-content: space-between;
+}
+
+.temp-ind {
+  display: inline-block;
+  flex-wrap: wrap;
+  justify-self: auto;
+  margin: 2px;
+}
