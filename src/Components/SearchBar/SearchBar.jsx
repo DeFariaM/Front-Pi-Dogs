@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { getByName } from "../../Redux/Actions/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const SearchBar = () => {
+const SearchBar = ({ setCurrentPage }) => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
 
@@ -12,6 +12,7 @@ const SearchBar = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    setCurrentPage(1);
 
     input.length !== 0
       ? dispatch(getByName(input))

@@ -5,17 +5,24 @@ import Detail from "./Views/Detail";
 import Create from "./Views/Create";
 import "./App.css";
 import NavBar from "./Components/NavBar/NavBar";
-import { useSelector } from "react-redux";
+
+import { useState } from "react";
 
 function App() {
   const { pathname } = useLocation();
+  const [currentPage, setCurrentPage] = useState(1);
+
   return (
     <>
       <div>
-        {pathname !== "/" ? <NavBar /> : null}
+        {pathname !== "/" ? <NavBar setCurrentPage={setCurrentPage} /> : null}
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/home" element={<Home />}></Route>
+          <Route
+            path="/home"
+            element={
+              <Home currentPage={currentPage} setCurrentPage={setCurrentPage} />
+            }></Route>
           <Route path="/detail/:id" element={<Detail />}></Route>
           <Route path="/create" element={<Create />}></Route>
         </Routes>

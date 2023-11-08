@@ -11,12 +11,11 @@ import {
 } from "../Redux/Actions/actions";
 import Cards from "../Components/Cards/Cards";
 
-const Home = () => {
+const Home = ({ currentPage, setCurrentPage }) => {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state?.allDogs);
   const temperaments = useSelector((state) => state.temperaments);
   const [aux, setAux] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     dispatch(getDogs());
@@ -46,9 +45,9 @@ const Home = () => {
     dispatch(filterByOrigin(e.target.value));
     setCurrentPage(1);
   };
-
   const reset = () => {
     dispatch(getDogs());
+    setCurrentPage(1);
   };
 
   return (

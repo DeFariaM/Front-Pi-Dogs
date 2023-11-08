@@ -2,11 +2,13 @@ import React from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import { NavLink, useLocation } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ setCurrentPage }) => {
   const { pathname } = useLocation();
   return (
     <div>
-      {pathname === "/home" ? <SearchBar /> : null}
+      {pathname === "/home" ? (
+        <SearchBar setCurrentPage={setCurrentPage} />
+      ) : null}
       {pathname !== "/create" ? (
         <NavLink to="/create">
           <button>Create your own dog</button>
