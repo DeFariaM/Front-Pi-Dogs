@@ -10,6 +10,7 @@ import {
   GET_TEMPERAMENTS,
   ORDER_BY_NAME,
   ORDER_BY_WEIGHT,
+  POST,
 } from "./actions-types";
 const URL = "http://localhost:3001";
 
@@ -88,5 +89,16 @@ export function filterByOrigin(origin) {
   return {
     type: FILTER_BY_ORIGIN,
     payload: origin,
+  };
+}
+
+export function postDog(dog) {
+  return async function (dispatch) {
+    const { data } = await axios.post(`${URL}/dogs`, dog);
+
+    return dispatch({
+      type: POST,
+      payload: data.id,
+    });
   };
 }

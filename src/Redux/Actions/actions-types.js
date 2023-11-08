@@ -8,3 +8,5 @@ export const CLEAR_ORDERS = "CLEAR_ORDERS";
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS";
 export const FILTER_BY_TEMPERAMENTS = "FILTER_BY_TEMPERAMENTS";
 export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
+export const POST = "POST";
+export const ERROR = "ERROR";

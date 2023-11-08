@@ -1,6 +1,7 @@
 import {
   CLEAR_DATA,
   CLEAR_ORDERS,
+  ERROR,
   FILTER_BY_ORIGIN,
   FILTER_BY_TEMPERAMENTS,
   GET_BY_ID,
@@ -9,6 +10,7 @@ import {
   GET_TEMPERAMENTS,
   ORDER_BY_NAME,
   ORDER_BY_WEIGHT,
+  POST,
 } from "../Actions/actions-types";
 
 let initialState = {
@@ -16,6 +18,8 @@ let initialState = {
   copyDogs: [],
   detailDog: [],
   temperaments: [],
+  createdDog: [],
+  searched: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -30,18 +34,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, detailDog: [] };
 
     case GET_BY_NAME:
-      return { ...state, allDogs: payload };
+      return { ...state, allDogs: payload, searched: payload };
 
     case ORDER_BY_NAME:
       let copy = state.allDogs;
       copy = copy.sort((a, b) => {
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
         if (payload === "ASC") {
-          if (a.name > b.name) return 1;
-          if (a.name < b.name) return -1;
+          if (nameA > nameB) return 1;
+          if (nameA < nameB) return -1;
           return 0;
         } else {
-          if (a.name < b.name) return 1;
-          if (a.name > b.name) return -1;
+          if (nameA < nameB) return 1;
+          if (nameA > nameB) return -1;
           return 0;
         }
       });
@@ -76,6 +82,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
       } else {
         return { ...state, allDogs: state.copyDogs };
       }
+
+    case POST:
+      return { ...state, createdDog: payload };
 
     case CLEAR_ORDERS:
       return { ...state, allDogs: state.copyDogs };

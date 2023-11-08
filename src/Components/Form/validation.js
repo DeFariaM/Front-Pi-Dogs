@@ -8,6 +8,8 @@ export const validation = (input) => {
     errors.name = "The name must have less than 20 characters";
   } else if (/\d/.test(input.name)) {
     errors.name = "The name cant't have a number";
+  } else if (!/\b[A-Z]/.test(input.name)) {
+    errors.name = "The first letter must be upperCase";
   } else {
     errors.name = "";
   }
@@ -51,6 +53,12 @@ export const validation = (input) => {
   } else {
     errors.life_span = "";
   }
+  /* 
+  if (input.Temperaments.lenght <= 0) {
+    errors.Temperaments = "You have to choose at least one temperament";
+  } else if (input.Temperaments.length > 0 && input.Temperaments.length <= 10) {
+    errors.Temperaments = "";
+  } */
 
   return errors;
 };
