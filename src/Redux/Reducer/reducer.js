@@ -19,7 +19,7 @@ let initialState = {
   detailDog: [],
   temperaments: [],
   createdDog: [],
-  searched: [],
+  searched: "",
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -34,7 +34,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, detailDog: [] };
 
     case GET_BY_NAME:
-      return { ...state, allDogs: payload, searched: payload };
+      if (payload.length > 0) {
+        return {
+          ...state,
+          allDogs: payload,
+          searched: true,
+        };
+      } else {
+        return {
+          ...state,
+          allDogs: state.copyDogs,
+          searched: false,
+        };
+      }
 
     case ORDER_BY_NAME:
       let copy = state.allDogs;

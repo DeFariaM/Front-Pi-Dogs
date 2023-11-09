@@ -14,9 +14,19 @@ const SearchBar = ({ setCurrentPage }) => {
     e.preventDefault();
     setCurrentPage(1);
 
-    input.length !== 0
-      ? dispatch(getByName(input))
-      : window.alert("Please search something valid!");
+    if (/\d/.test(input)) {
+      window.alert("You only can use letters");
+      setInput("");
+    } else if (!input.length) {
+      window.alert("Please search something valid");
+    } else if (input.length !== 0) {
+      dispatch(getByName(input)).then(({ payload }) => {
+        if (!payload.length) {
+          window.alert("That dog breed doesn't exists");
+          setInput("");
+        }
+      });
+    }
   };
 
   return (

@@ -16,12 +16,14 @@ const URL = "http://localhost:3001";
 
 export function getDogs() {
   return async function (dispatch) {
-    const { data } = await axios(`${URL}/dogs`);
+    try {
+      const { data } = await axios(`${URL}/dogs`);
 
-    return dispatch({
-      type: GET_DOGS,
-      payload: data,
-    });
+      return dispatch({
+        type: GET_DOGS,
+        payload: data,
+      });
+    } catch (error) {}
   };
 }
 
@@ -98,7 +100,7 @@ export function postDog(dog) {
 
     return dispatch({
       type: POST,
-      payload: data.id,
+      payload: data,
     });
   };
 }

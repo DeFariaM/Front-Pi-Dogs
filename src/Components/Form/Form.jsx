@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const created = useSelector((state) => state.createdDog);
+  const [id, setId] = useState();
 
   useEffect(() => {
     dispatch(getTemperaments());
@@ -72,10 +72,12 @@ const Form = () => {
       alert("This breed name already exists!");
       return;
     }
-    dispatch(postDog(input));
-
-    alert("The new breed was created succesfully");
-    navigate("/home");
+    dispatch(postDog(input))
+      .then(({ payload }) => {
+        alert(payload.message);
+        setId(payload.id);
+      })
+      .then(() => navigate(`/detail/${id}`));
   };
 
   return (

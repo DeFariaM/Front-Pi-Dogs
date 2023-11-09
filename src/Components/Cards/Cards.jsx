@@ -13,7 +13,6 @@ const Cards = ({ dogs, currentPage, setCurrentPage }) => {
 
   const next = () => {
     const total = dogs.length;
-
     const nextPage = currentPage + 1;
     const firstIndex = nextPage * itemsPerPage;
 
