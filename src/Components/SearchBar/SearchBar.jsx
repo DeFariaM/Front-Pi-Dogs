@@ -10,6 +10,10 @@ const SearchBar = ({ setCurrentPage }) => {
     setInput(e.target.value);
   };
 
+  const handleKey = (e) => {
+    if (e.key === "Enter") handleClick(e);
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
     setCurrentPage(1);
@@ -22,7 +26,7 @@ const SearchBar = ({ setCurrentPage }) => {
     } else if (input.length !== 0) {
       dispatch(getByName(input)).then(({ payload }) => {
         if (!payload.length) {
-          window.alert("That dog breed doesn't exists");
+          window.alert(payload.error);
           setInput("");
         }
       });
@@ -36,8 +40,9 @@ const SearchBar = ({ setCurrentPage }) => {
         value={input}
         placeholder="Please write a breed!"
         onChange={handleChange}
+        onKeyDown={handleKey}
       />
-      <button type="submit" onClick={(e) => handleClick(e)}>
+      <button type="submit" onClick={handleClick}>
         Search
       </button>
     </div>

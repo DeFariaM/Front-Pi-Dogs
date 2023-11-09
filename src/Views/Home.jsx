@@ -11,7 +11,7 @@ import {
 } from "../Redux/Actions/actions";
 import Cards from "../Components/Cards/Cards";
 
-const Home = ({ currentPage, setCurrentPage }) => {
+const Home = ({ currentPage, setCurrentPage, inputPage, setInputPage }) => {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state?.allDogs);
   const temperaments = useSelector((state) => state.temperaments);
@@ -27,24 +27,29 @@ const Home = ({ currentPage, setCurrentPage }) => {
     dispatch(orderByName(e.target.value));
     setAux(!aux);
     setCurrentPage(1);
+    setInputPage(1);
   };
   const handleOrderWeight = (e) => {
     dispatch(orderByWeight(e.target.value));
     setAux(!aux);
     setCurrentPage(1);
+    setInputPage(1);
   };
 
   const handleFilterTemp = (e) => {
     e.preventDefault();
     dispatch(filterByTemperaments(e.target.value));
     setCurrentPage(1);
+    setInputPage(1);
   };
 
   const handleFilterOrigin = (e) => {
     e.preventDefault();
     dispatch(filterByOrigin(e.target.value));
     setCurrentPage(1);
+    setInputPage(1);
   };
+
   const reset = () => {
     dispatch(getDogs());
     setCurrentPage(1);
@@ -61,6 +66,7 @@ const Home = ({ currentPage, setCurrentPage }) => {
           <option name={"placeholder"} hidden>
             Temperaments
           </option>
+          <option value="All">All</option>
           {temperaments?.map((t) => {
             return (
               <option key={t.id} value={t.name}>
@@ -97,6 +103,8 @@ const Home = ({ currentPage, setCurrentPage }) => {
         dogs={allDogs}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        setInputPage={setInputPage}
+        inputPage={inputPage}
       />
     </div>
   );

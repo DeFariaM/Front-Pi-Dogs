@@ -2,22 +2,19 @@ import React, { useEffect, useState } from "react";
 import { validation } from "./validation";
 import { useDispatch, useSelector } from "react-redux";
 import "./Form.css";
-import { getDogs, getTemperaments, postDog } from "../../Redux/Actions/actions";
+import { getTemperaments, postDog } from "../../Redux/Actions/actions";
 import { useNavigate } from "react-router-dom";
 
 const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [id, setId] = useState();
 
   useEffect(() => {
     dispatch(getTemperaments());
-    dispatch(getDogs());
   }, [dispatch]);
 
   const [selectedTemps, setSelectedTemps] = useState([]);
 
-  const dogs = useSelector((state) => state.allDogs);
   const temperaments = useSelector((state) => state.temperaments);
   const [input, setInput] = useState({
     name: "",
@@ -67,17 +64,17 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const filter = dogs.filter((d) => d.name === input.name);
-    if (filter.length) {
-      alert("This breed name already exists!");
-      return;
-    }
-    dispatch(postDog(input))
-      .then(({ payload }) => {
+
+    dispatch(postDog(input)).then(({ payload }) => {
+      if (payload.error) {
+        alert(payload.error);
+        setInput({ ...input, name: "" });
+      }
+      if (payload.message) {
         alert(payload.message);
-        setId(payload.id);
-      })
-      .then(() => navigate(`/detail/${id}`));
+        navigate("/home");
+      }
+    });
   };
 
   return (

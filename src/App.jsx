@@ -11,6 +11,7 @@ import { useState } from "react";
 function App() {
   const { pathname } = useLocation();
   const [currentPage, setCurrentPage] = useState(1);
+  const [inputPage, setInputPage] = useState(1);
 
   return (
     <>
@@ -21,7 +22,12 @@ function App() {
           <Route
             path="/home"
             element={
-              <Home currentPage={currentPage} setCurrentPage={setCurrentPage} />
+              <Home
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                inputPage={inputPage}
+                setInputPage={setInputPage}
+              />
             }></Route>
           <Route path="/detail/:id" element={<Detail />}></Route>
           <Route path="/create" element={<Create />}></Route>

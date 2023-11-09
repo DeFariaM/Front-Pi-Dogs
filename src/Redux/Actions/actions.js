@@ -16,14 +16,12 @@ const URL = "http://localhost:3001";
 
 export function getDogs() {
   return async function (dispatch) {
-    try {
-      const { data } = await axios(`${URL}/dogs`);
+    const { data } = await axios(`${URL}/dogs`);
 
-      return dispatch({
-        type: GET_DOGS,
-        payload: data,
-      });
-    } catch (error) {}
+    return dispatch({
+      type: GET_DOGS,
+      payload: data,
+    });
   };
 }
 
@@ -40,12 +38,19 @@ export function getDogsID(id) {
 
 export function getByName(name) {
   return async function (dispatch) {
-    const { data } = await axios(`${URL}/name?name=${name}`);
+    try {
+      const { data } = await axios(`${URL}/name?name=${name}`);
 
-    return dispatch({
-      type: GET_BY_NAME,
-      payload: data,
-    });
+      return dispatch({
+        type: GET_BY_NAME,
+        payload: data,
+      });
+    } catch (error) {
+      return dispatch({
+        type: "ERROR",
+        payload: error.response.data,
+      });
+    }
   };
 }
 
@@ -96,11 +101,20 @@ export function filterByOrigin(origin) {
 
 export function postDog(dog) {
   return async function (dispatch) {
-    const { data } = await axios.post(`${URL}/dogs`, dog);
+    try {
+      const { data } = await axios.post(`${URL}/dogs`, dog);
 
-    return dispatch({
-      type: POST,
-      payload: data,
-    });
+      return dispatch({
+        type: POST,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+
+      return dispatch({
+        type: "Error",
+        payload: error.response.data,
+      });
+    }
   };
 }

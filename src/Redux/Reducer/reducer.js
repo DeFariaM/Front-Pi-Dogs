@@ -1,7 +1,6 @@
 import {
   CLEAR_DATA,
   CLEAR_ORDERS,
-  ERROR,
   FILTER_BY_ORIGIN,
   FILTER_BY_TEMPERAMENTS,
   GET_BY_ID,
@@ -18,8 +17,7 @@ let initialState = {
   copyDogs: [],
   detailDog: [],
   temperaments: [],
-  createdDog: [],
-  searched: "",
+  originDog: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -34,19 +32,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, detailDog: [] };
 
     case GET_BY_NAME:
-      if (payload.length > 0) {
-        return {
-          ...state,
-          allDogs: payload,
-          searched: true,
-        };
-      } else {
-        return {
-          ...state,
-          allDogs: state.copyDogs,
-          searched: false,
-        };
-      }
+      return { ...state, allDogs: payload };
 
     case ORDER_BY_NAME:
       let copy = state.allDogs;
@@ -79,7 +65,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, temperaments: payload };
 
     case FILTER_BY_TEMPERAMENTS:
-      let copyT = state.copyDogs;
+      let copyT = state.originDog.length ? state.originDog : state.copyDogs;
+      if (payload === "All") {
+        if (state.originDog.length)
+          return { ...state, allDogs: state.originDog };
+        return { ...state, allDogs: state.copyDogs };
+      }
       copyT = copyT.filter((t) => t.Temperaments.includes(payload));
       return { ...state, allDogs: copyT };
 
@@ -87,16 +78,16 @@ const rootReducer = (state = initialState, { type, payload }) => {
       let copyO = state.copyDogs;
       if (payload === "DB") {
         const filterDB = copyO.filter((dog) => dog.created === true);
-        return { ...state, allDogs: filterDB };
+        return { ...state, allDogs: filterDB, originDog: filterDB };
       } else if (payload === "API") {
         const filterAPI = copyO.filter((dog) => dog.created === false);
-        return { ...state, allDogs: filterAPI };
+        return { ...state, allDogs: filterAPI, originDog: filterAPI };
       } else {
         return { ...state, allDogs: state.copyDogs };
       }
 
-    case POST:
-      return { ...state, createdDog: payload };
+    /* case POST:
+      return { ...state, createdDog: payload }; */
 
     case CLEAR_ORDERS:
       return { ...state, allDogs: state.copyDogs };
