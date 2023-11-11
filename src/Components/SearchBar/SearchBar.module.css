@@ -1,0 +1,27 @@
+.src_btn {
+  fill: #6284ea;
+  stroke-width: 6px;
+  stroke: rgba(53, 78, 210, 0.63);
+  background-color: transparent;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.input_src {
+  margin-top: 21px;
+
+  height: 33px;
+  position: fixed;
+  right: 310px;
+}
+
+.src_btn {
+  margin-top: 12px;
+  position: fixed;
+  right: 250px;
+}
