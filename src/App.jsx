@@ -3,7 +3,7 @@ import Landing from "./Views/Landing";
 import Home from "./Views/Home";
 import Detail from "./Views/Detail";
 import Create from "./Views/Create";
-import "./App.css";
+
 import NavBar from "./Components/NavBar/NavBar";
 
 import { useState } from "react";
