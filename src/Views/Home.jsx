@@ -10,6 +10,8 @@ import {
   orderByWeight,
 } from "../Redux/Actions/actions";
 import Cards from "../Components/Cards/Cards";
+import style from "./Home.module.css";
+const { wrapper, wrap_all } = style;
 
 const Home = ({ currentPage, setCurrentPage, inputPage, setInputPage }) => {
   const dispatch = useDispatch();
@@ -53,51 +55,54 @@ const Home = ({ currentPage, setCurrentPage, inputPage, setInputPage }) => {
   const reset = () => {
     dispatch(getDogs());
     setCurrentPage(1);
+    setInputPage(1);
   };
 
   return (
     <div>
-      <div>
-        <select
-          name="temperaments"
-          id="temps"
-          defaultValue={"placeholder"}
-          onChange={handleFilterTemp}>
-          <option name={"placeholder"} hidden>
-            Temperaments
-          </option>
-          <option value="All">All</option>
-          {temperaments?.map((t) => {
-            return (
-              <option key={t.id} value={t.name}>
-                {t.name}
-              </option>
-            );
-          })}
-        </select>
+      <div className={wrap_all}>
+        <button onClick={reset}>Reset</button>
+        <button value={"ASC"} onClick={handleOrder}>
+          A - Z
+        </button>
+        <button value={"DESC"} onClick={handleOrder}>
+          Z - A
+        </button>
+        <button value={"Lighter"} onClick={handleOrderWeight}>
+          Lighter
+        </button>
+        <button value={"Heavier"} onClick={handleOrderWeight}>
+          Heavier
+        </button>
+        <div className={wrapper}>
+          <select
+            name="temperaments"
+            id="temps"
+            defaultValue={"placeholder"}
+            onChange={handleFilterTemp}>
+            <option name={"placeholder"} hidden>
+              Temperaments
+            </option>
+            <option value="All">All</option>
+            {temperaments?.map((t) => {
+              return (
+                <option key={t.id} value={t.name}>
+                  {t.name}
+                </option>
+              );
+            })}
+          </select>
 
-        <select defaultValue={"placeholder"} onChange={handleFilterOrigin}>
-          <option name={"placeholder"} hidden>
-            Origin
-          </option>
-          <option value="DB">Created</option>
-          <option value="API">Existent</option>
-          <option value="ALL">All</option>
-        </select>
+          <select defaultValue={"placeholder"} onChange={handleFilterOrigin}>
+            <option name={"placeholder"} hidden>
+              Origin
+            </option>
+            <option value="DB">Created</option>
+            <option value="API">Existent</option>
+            <option value="ALL">All</option>
+          </select>
+        </div>
       </div>
-      <button onClick={reset}>reset</button>
-      <button value={"ASC"} onClick={handleOrder}>
-        A - Z
-      </button>
-      <button value={"DESC"} onClick={handleOrder}>
-        Z - A
-      </button>
-      <button value={"Lighter"} onClick={handleOrderWeight}>
-        Lighter
-      </button>
-      <button value={"Heavier"} onClick={handleOrderWeight}>
-        Heavier
-      </button>
 
       <Cards
         dogs={allDogs}

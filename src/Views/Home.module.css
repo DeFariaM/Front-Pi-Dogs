@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrap_all {
+  margin-top: 90px;
+  height: 50px;
+  width: 100vw;
+  margin-right: auto;
+  margin-left: auto;
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  justify-content: center;
+}
+
+select,
+button {
+  margin-left: 10px;
+  height: 40px;
+  text-align: center;
+}
