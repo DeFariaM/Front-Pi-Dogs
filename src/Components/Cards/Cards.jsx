@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Card from "../Card/Card";
-import { NavLink } from "react-router-dom";
+import style from "./Cards.module.css";
+const { wrapper, card_wrap, page_wrap, input_page } = style;
 
 const Cards = ({
   dogs,
@@ -17,6 +18,12 @@ const Cards = ({
   };
 
   const inputSearch = () => {
+    if (inputPage < 1) {
+      alert("Please search a page greater than 1");
+      setInputPage(1);
+      setCurrentPage(1);
+      return;
+    }
     if (inputPage > totalPages) {
       alert(`We're sorry, but we only have ${totalPages} pages`);
       setInputPage(1);
@@ -48,24 +55,26 @@ const Cards = ({
   };
 
   return (
-    <div>
-      <button onClick={prev}>Prev</button>
-      <input
-        type="search"
-        value={inputPage}
-        onKeyDown={handleKey}
-        placeholder={currentPage}
-        onChange={handleInput}></input>
-      <button onClick={inputSearch}>Go</button>
-      <button onClick={next}>Next</button>
-
-      {dogs
-        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-        .map((dog, index) => (
-          <NavLink key={index} to={`/detail/${dog.id}`}>
+    <div className={wrapper}>
+      <div className={card_wrap}>
+        {dogs
+          .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+          .map((dog, index) => (
             <Card key={index} dog={dog} />
-          </NavLink>
-        ))}
+          ))}
+      </div>
+      <div className={page_wrap}>
+        <button onClick={prev}>Prev</button>
+        <input
+          className={input_page}
+          type="text"
+          value={inputPage}
+          onKeyDown={handleKey}
+          min={1}
+          onChange={handleInput}></input>
+        <button onClick={inputSearch}>Go</button>
+        <button onClick={next}>Next</button>
+      </div>
     </div>
   );
 };
