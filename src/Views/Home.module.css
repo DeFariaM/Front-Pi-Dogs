@@ -21,3 +21,7 @@ button {
   height: 40px;
   text-align: center;
 }
+
+.vh {
+  height: 100vh;
+}

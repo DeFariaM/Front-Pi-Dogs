@@ -11,7 +11,7 @@ import {
 } from "../Redux/Actions/actions";
 import Cards from "../Components/Cards/Cards";
 import style from "./Home.module.css";
-const { wrapper, wrap_all } = style;
+const { vh, wrapper, wrap_all } = style;
 
 const Home = ({ currentPage, setCurrentPage, inputPage, setInputPage }) => {
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const Home = ({ currentPage, setCurrentPage, inputPage, setInputPage }) => {
   };
 
   return (
-    <div>
+    <div className={vh}>
       <div className={wrap_all}>
         <button onClick={reset}>Reset</button>
         <button value={"ASC"} onClick={handleOrder}>
