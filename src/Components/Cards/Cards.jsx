@@ -18,6 +18,12 @@ const Cards = ({
   };
 
   const inputSearch = () => {
+    if (isNaN(inputPage)) {
+      alert("Please insert only numbers");
+      setInputPage(1);
+      setCurrentPage(1);
+      return;
+    }
     if (inputPage < 1) {
       alert("Please search a page greater than 1");
       setInputPage(1);
