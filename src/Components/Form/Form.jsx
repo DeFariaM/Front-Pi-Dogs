@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { validation } from "./validation";
 import { useDispatch, useSelector } from "react-redux";
-import "./Form.css";
+
 import { getTemperaments, postDog } from "../../Redux/Actions/actions";
 import { useNavigate } from "react-router-dom";
+import style from "./Form.module.css";
+const {
+  btn_sub,
+  input_num,
+  temps,
+  wrapper,
+  input_wrapper,
+  buttonClose,
+  tempSelec,
+  error_span,
+  input_text,
+  input_image,
+  formulario,
+  label,
+  contenedorCountry,
+  contenedorC,
+  contenedorFormulario,
+} = style;
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -12,8 +30,6 @@ const Form = () => {
   useEffect(() => {
     dispatch(getTemperaments());
   }, [dispatch]);
-
-  const [selectedTemps, setSelectedTemps] = useState([]);
 
   const temperaments = useSelector((state) => state.temperaments);
   const [input, setInput] = useState({
@@ -25,6 +41,7 @@ const Form = () => {
     life_span: "",
     temperament: [],
   });
+  console.log(input);
 
   const [error, setError] = useState({
     name: "This can't be empty",
@@ -41,25 +58,24 @@ const Form = () => {
     setError(validation({ ...input, [name]: value }));
   };
 
-  const handleCheck = (e) => {
-    const { value, checked } = e.target;
-
-    if (selectedTemps.length === 10)
+  const handleSelect = (e) => {
+    if (input.temperament.length === 10) {
       window.alert("Your new dog only can have 10 temperaments");
-
-    if (checked && selectedTemps.length < 10) {
-      setSelectedTemps([...selectedTemps, value]);
-      setInput({
-        ...input,
-        temperament: [...input.temperament, value],
-      });
+    } else if (input.temperament.includes(e.target.value)) {
+      window.alert("You can't choose the same temperamente more than once");
     } else {
-      setSelectedTemps(selectedTemps.filter((t) => t !== value));
       setInput({
         ...input,
-        temperament: input.temperament.filter((t) => t !== value),
+        temperament: [...input.temperament, e.target.value],
       });
     }
+  };
+
+  const handleRemove = (e) => {
+    setInput({
+      ...input,
+      temperament: input.temperament.filter((temp) => temp !== e.target.value),
+    });
   };
 
   const handleSubmit = (e) => {
@@ -78,111 +94,169 @@ const Form = () => {
   };
 
   return (
-    <div>
-      <form action="" onSubmit={handleSubmit}>
-        <label htmlFor="1">Name:</label>
-        <input
-          name="name"
-          id="1"
-          type="text"
-          placeholder="For example: Affenpinscher"
-          onChange={handleChange}
-        />
-        <span>{error.name}</span>
-        <br />
-
-        <span>Weight</span>
-        <label htmlFor="2">Min:</label>
-        <input
-          id="2"
-          name="weight_min"
-          type="number"
-          placeholder="0"
-          onChange={handleChange}
-          min={0}
-        />
-
-        <label htmlFor="3">Max:</label>
-        <input
-          min={0}
-          id="3"
-          name="weight_max"
-          type="number"
-          placeholder="0"
-          onChange={handleChange}
-        />
-        <span>KG</span>
-        <span>{error.weight}</span>
-        <br />
-
-        <span>Height</span>
-        <label htmlFor="4">Min:</label>
-        <input
-          min={0}
-          id="4"
-          name="height_min"
-          type="number"
-          placeholder="0"
-          onChange={handleChange}
-        />
-
-        <label htmlFor="5">Max:</label>
-        <input
-          id="5"
-          min={0}
-          name="height_max"
-          type="number"
-          placeholder="0"
-          onChange={handleChange}
-        />
-        <span>CM</span>
-        <span>{error.height}</span>
-        <br />
-        <label htmlFor="6">Life span:</label>
-        <input
-          id="6"
-          name="life_span"
-          type="text"
-          placeholder="For example: 12 - 15"
-          onChange={handleChange}
-        />
-
-        <span>Years</span>
-        <span>{error.life_span}</span>
-        <br />
-
-        <label htmlFor="7">Image:</label>
-        <input id="7" name="image" type="file" />
-        <br />
-        <div className="temperaments">
-          {temperaments?.map((temp, index) => (
-            <span key={index} htmlFor={temp.id}>
-              {temp.name}
+    <div className={contenedorFormulario}>
+      <section className={formulario}>
+        <form action="" onSubmit={handleSubmit}>
+          <div className={wrapper}>
+            <div className={input_wrapper}>
+              <label className={label} htmlFor="1">
+                Name:
+              </label>
               <input
-                type="checkbox"
-                name={temp.id}
-                key={temp.id}
-                value={temp.name}
-                checked={selectedTemps.includes(temp.name)}
-                onChange={handleCheck}
+                className={input_text}
+                name="name"
+                id="1"
+                type="text"
+                placeholder="For example: Affenpinscher"
+                onChange={handleChange}
               />
-            </span>
-          ))}
-        </div>
-        <span>You have to choose at least one temperament</span>
-        {!error.name &&
-        !error.height &&
-        !error.life_span &&
-        !error.weight &&
-        !error.Temperaments &&
-        selectedTemps.length > 0 ? (
-          <button type="submit">Submit</button>
-        ) : (
-          <button type="submit" disabled>
-            Submit
-          </button>
-        )}
-      </form>
+            </div>
+
+            <span className={error_span}>{error.name}</span>
+
+            <div className={input_wrapper}>
+              <span className={label}>Weight</span>
+              <label className={label} htmlFor="2">
+                Min:
+              </label>
+              <input
+                className={input_num}
+                id="2"
+                name="weight_min"
+                type="number"
+                placeholder="0"
+                onChange={handleChange}
+                min={0}
+              />
+
+              <label className={label} htmlFor="3">
+                Max:
+              </label>
+              <input
+                className={input_num}
+                min={0}
+                id="3"
+                name="weight_max"
+                type="number"
+                placeholder="0"
+                onChange={handleChange}
+              />
+              <span className={label}>KG</span>
+            </div>
+
+            <span className={error_span}>{error.weight}</span>
+
+            <div className={input_wrapper}>
+              <span className={label}>Height</span>
+              <label className={label} htmlFor="4">
+                Min:
+              </label>
+              <input
+                className={input_num}
+                min={0}
+                id="4"
+                name="height_min"
+                type="number"
+                placeholder="0"
+                onChange={handleChange}
+              />
+
+              <label className={label} htmlFor="5">
+                Max:
+              </label>
+              <input
+                className={input_num}
+                id="5"
+                min={0}
+                name="height_max"
+                type="number"
+                placeholder="0"
+                onChange={handleChange}
+              />
+              <span className={label}>CM</span>
+            </div>
+
+            <span className={error_span}>{error.height}</span>
+
+            <div className={input_wrapper}>
+              <label className={label} htmlFor="6">
+                Life span:
+              </label>
+              <input
+                className={input_text}
+                id="6"
+                name="life_span"
+                type="text"
+                placeholder="For example: 12 - 15"
+                onChange={handleChange}
+              />
+              <span className={label}>Years</span>
+            </div>
+
+            <span className={error_span}>{error.life_span}</span>
+
+            <div className={input_wrapper}>
+              <label className={label} htmlFor="7">
+                Image:
+              </label>
+              <br />
+              <input className={input_image} id="7" name="image" type="file" />
+            </div>
+          </div>
+
+          <label className={label}>Temperamentos</label>
+          <select
+            className={temps}
+            name="temperament"
+            onChange={handleSelect}
+            required>
+            <option classname={label} hidden>
+              Choose the temperaments
+            </option>
+            {temperaments?.map((t) => {
+              return (
+                <option value={t.name} key={t.id}>
+                  {t.name}
+                </option>
+              );
+            })}
+          </select>
+
+          <div className={contenedorC}>
+            {input.temperament?.map((temp, index) => {
+              return (
+                <div key={index}>
+                  <div className={contenedorCountry}>
+                    <button
+                      className={buttonClose}
+                      value={temp}
+                      type="button"
+                      onClick={handleRemove}>
+                      X
+                    </button>
+                    <span className={tempSelec}>{temp}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {!error.name &&
+          !error.height &&
+          !error.life_span &&
+          !error.weight &&
+          !error.Temperaments &&
+          input.temperament.length > 0 ? (
+            <button className={btn_sub} type="submit">
+              Submit
+            </button>
+          ) : (
+            <button className={btn_sub} type="submit" disabled>
+              Submit
+            </button>
+          )}
+        </form>
+      </section>
     </div>
   );
 };
