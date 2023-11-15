@@ -17,7 +17,6 @@ let initialState = {
   copyDogs: [],
   detailDog: [],
   temperaments: [],
-  originDog: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -65,10 +64,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state, temperaments: payload };
 
     case FILTER_BY_TEMPERAMENTS:
-      let copyT = state.originDog.length ? state.originDog : state.copyDogs;
+      let copyT = state.copyDogs;
       if (payload === "All") {
-        if (state.originDog.length)
-          return { ...state, allDogs: state.originDog };
         return { ...state, allDogs: state.copyDogs };
       }
       copyT = copyT.filter((t) => t.Temperaments.includes(payload));
@@ -78,10 +75,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       let copyO = state.copyDogs;
       if (payload === "DB") {
         const filterDB = copyO.filter((dog) => dog.created === true);
-        return { ...state, allDogs: filterDB, originDog: filterDB };
+        return { ...state, allDogs: filterDB };
       } else if (payload === "API") {
         const filterAPI = copyO.filter((dog) => dog.created === false);
-        return { ...state, allDogs: filterAPI, originDog: filterAPI };
+        return { ...state, allDogs: filterAPI };
       } else {
         return { ...state, allDogs: state.copyDogs };
       }
