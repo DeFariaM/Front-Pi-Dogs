@@ -15,6 +15,7 @@ body {
     rgba(106, 45, 168, 0.63) 100.65%,
     rgba(153, 84, 222, 0.63) 100.65%
   );
+  background-attachment: fixed;
 }
 
 button,
@@ -50,4 +51,8 @@ select:focus {
 select:hover,
 button:hover {
   opacity: 80%;
+}
+option:hover,
+option:focus {
+  background-color: #958cfe;
 }
