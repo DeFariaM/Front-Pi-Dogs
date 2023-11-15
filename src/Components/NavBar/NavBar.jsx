@@ -14,7 +14,7 @@ const NavBar = ({ setCurrentPage }) => {
       {pathname === "/home" ? (
         <SearchBar setCurrentPage={setCurrentPage} />
       ) : null}
-      {pathname !== "/create" ? (
+      {pathname === "/home" ? (
         <NavLink to="/create" className={link}>
           <button className={btn}>Create your own dog</button>
         </NavLink>
