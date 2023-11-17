@@ -33,6 +33,12 @@ option {
   cursor: pointer;
 }
 
+select,
+button {
+  margin-left: 10px;
+  height: 40px;
+  text-align: center;
+}
 input::placeholder {
   color: #fff;
 }
