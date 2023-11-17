@@ -3,8 +3,9 @@
   stroke-width: 6px;
   stroke: rgba(53, 78, 210, 0.63);
   background-color: transparent;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 10px;
+  position: fixed;
+  right: 110px;
 }
 
 .wrapper {
@@ -13,15 +14,9 @@
 }
 
 .input_src {
-  margin-top: 21px;
+  margin-top: 17px;
 
-  height: 33px;
+  height: 40px;
   position: fixed;
-  right: 310px;
-}
-
-.src_btn {
-  margin-top: 12px;
-  position: fixed;
-  right: 250px;
+  right: 160px;
 }

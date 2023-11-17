@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getByName } from "../../Redux/Actions/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
 import style from "./SearchBar.module.css";
 const { src_btn, wrapper, input_src } = style;
 
