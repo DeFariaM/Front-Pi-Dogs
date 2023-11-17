@@ -15,6 +15,23 @@
   /* margin-left: 0 auto; */
   align-content: center;
 }
+@media (min-width: 1400px) {
+  .card_wrap {
+    align-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .page_wrap {
+    position: fixed;
+    bottom: 25px;
+
+    left: 50%;
+    transform: translate(-50%);
+  }
+}
 
 button {
   display: flex;
