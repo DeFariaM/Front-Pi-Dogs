@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getByName } from "../../Redux/Actions/actions";
+import { getByName, getDogs, resetFilter } from "../../Redux/Actions/actions";
 import { useDispatch } from "react-redux";
 
 import style from "./SearchBar.module.css";
@@ -31,6 +31,7 @@ const SearchBar = ({ setCurrentPage }) => {
         if (!payload.length) {
           window.alert(payload.error);
           setInput("");
+          dispatch(getDogs());
         }
       });
     }
