@@ -1,15 +1,15 @@
 import {
   CLEAR_DATA,
-  CLEAR_ORDERS,
   FILTER_BY_ORIGIN,
   FILTER_BY_TEMPERAMENTS,
   GET_BY_ID,
   GET_BY_NAME,
   GET_DOGS,
   GET_TEMPERAMENTS,
+  LOADING,
   ORDER_BY_NAME,
   ORDER_BY_WEIGHT,
-  POST,
+  RESET,
 } from "../Actions/actions-types";
 
 let initialState = {
@@ -17,24 +17,25 @@ let initialState = {
   copyDogs: [],
   detailDog: [],
   temperaments: [],
+  loading: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_DOGS:
-      return { ...state, allDogs: payload, copyDogs: payload };
+      return { ...state, allDogs: payload, copyDogs: payload, loading: false };
 
     case GET_BY_ID:
-      return { ...state, detailDog: payload };
+      return { ...state, detailDog: payload, loading: false };
 
     case CLEAR_DATA:
       return { ...state, detailDog: [] };
 
     case GET_BY_NAME:
-      return { ...state, allDogs: payload };
+      return { ...state, allDogs: payload, loading: false };
 
     case ORDER_BY_NAME:
-      let copy = state.allDogs;
+      let copy = [...state.allDogs];
       copy = copy.sort((a, b) => {
         let nameA = a.name.toLowerCase();
         let nameB = b.name.toLowerCase();
@@ -48,46 +49,47 @@ const rootReducer = (state = initialState, { type, payload }) => {
           return 0;
         }
       });
-      return { ...state, allDogs: copy };
+      return { ...state, allDogs: copy, loading: false };
 
     case ORDER_BY_WEIGHT:
-      let copyW = state.allDogs;
+      let copyW = [...state.allDogs];
       copyW = copyW.sort((a, b) => {
         if (payload === "Lighter") {
           return a.weight_min - b.weight_min;
         }
         return b.weight_min - a.weight_min;
       });
-      return { ...state, allDogs: copyW };
+      return { ...state, allDogs: copyW, loading: false };
 
     case GET_TEMPERAMENTS:
       return { ...state, temperaments: payload };
 
     case FILTER_BY_TEMPERAMENTS:
-      let copyT = state.copyDogs;
+      let copyT = [...state.copyDogs];
       if (payload === "All") {
-        return { ...state, allDogs: state.copyDogs };
+        return { ...state, allDogs: state.copyDogs, loading: false };
       }
       copyT = copyT.filter((t) => t.Temperaments.includes(payload));
-      return { ...state, allDogs: copyT };
+      return { ...state, allDogs: copyT, loading: false };
 
     case FILTER_BY_ORIGIN:
-      let copyO = state.copyDogs;
+      let copyO = [...state.copyDogs];
       if (payload === "DB") {
         const filterDB = copyO.filter((dog) => dog.created === true);
-        return { ...state, allDogs: filterDB };
+        return { ...state, allDogs: filterDB, loading: false };
       } else if (payload === "API") {
         const filterAPI = copyO.filter((dog) => dog.created === false);
-        return { ...state, allDogs: filterAPI };
+        return { ...state, allDogs: filterAPI, loading: false };
       } else {
-        return { ...state, allDogs: state.copyDogs };
+        return { ...state, allDogs: state.copyDogs, loading: false };
       }
 
-    /* case POST:
-      return { ...state, createdDog: payload }; */
+    case LOADING:
+      return { ...state, loading: true };
 
-    case CLEAR_ORDERS:
+    case RESET:
       return { ...state, allDogs: state.copyDogs };
+
     default:
       return { ...state };
   }
