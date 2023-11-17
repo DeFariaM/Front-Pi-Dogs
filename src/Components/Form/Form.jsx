@@ -48,6 +48,7 @@ const Form = () => {
     weight: "This can't be empty",
     height: "This can't be empty",
     life_span: "This can't be empty",
+    temperament: "You have to choose at least one temperament",
   });
 
   const handleChange = (e) => {
@@ -68,6 +69,7 @@ const Form = () => {
         ...input,
         temperament: [...input.temperament, e.target.value],
       });
+      setError({ ...error, temperament: "" });
     }
   };
 
@@ -204,13 +206,16 @@ const Form = () => {
             </div>
           </div>
 
-          <label className={label}>Temperamentos</label>
+          <label className={label}>Temperaments</label>
+          <br />
+          <span className={error_span}>{error.temperament}</span>
+
           <select
             className={temps}
             name="temperament"
             onChange={handleSelect}
             required>
-            <option classname={label} hidden>
+            <option className={label} hidden>
               Choose the temperaments
             </option>
             {temperaments?.map((t) => {

@@ -53,12 +53,6 @@ export const validation = (input) => {
   } else {
     errors.life_span = "";
   }
-  /* 
-  if (input.Temperaments.lenght <= 0) {
-    errors.Temperaments = "You have to choose at least one temperament";
-  } else if (input.Temperaments.length > 0 && input.Temperaments.length <= 10) {
-    errors.Temperaments = "";
-  } */
 
   return errors;
 };
