@@ -13,7 +13,6 @@ import {
   POST,
   RESET,
 } from "./actions-types";
-const URL = "http://localhost:3001";
 
 export function getDogs() {
   return async function (dispatch) {
@@ -21,7 +20,7 @@ export function getDogs() {
       type: LOADING,
     });
 
-    const { data } = await axios(`${URL}/dogs`);
+    const { data } = await axios("/dogs");
     return dispatch({
       type: GET_DOGS,
       payload: data,
@@ -36,7 +35,7 @@ export function getDogsID(id) {
         type: LOADING,
       });
 
-      const { data } = await axios(`${URL}/dogs/${id}`);
+      const { data } = await axios(`/dogs/${id}`);
       return dispatch({
         type: GET_BY_ID,
         payload: data,
@@ -56,7 +55,7 @@ export function getByName(name) {
       dispatch({
         type: LOADING,
       });
-      const { data } = await axios(`${URL}/name?name=${name}`);
+      const { data } = await axios(`/name?name=${name}`);
 
       return dispatch({
         type: GET_BY_NAME,
@@ -74,7 +73,7 @@ export function getByName(name) {
 export function postDog(dog) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.post(`${URL}/dogs`, dog);
+      const { data } = await axios.post("/dogs", dog);
 
       dispatch({
         type: LOADING,
