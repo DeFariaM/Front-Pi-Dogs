@@ -44,12 +44,16 @@ button:disabled {
   align-items: center;
   justify-content: space-around;
   margin-top: 35px;
+}
 
-  position: absolute;
-  left: 50%;
-  top: 50%;
+@media (min-width: 1400px) {
+  .contenedorFormulario {
+    position: absolute;
+    left: 50%;
+    top: 50%;
 
-  transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
 }
 
 .formulario {
