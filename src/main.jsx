@@ -9,7 +9,7 @@ import "./index.css";
 import axios from "axios";
 
 /* axios.defaults.baseURL = "http://localhost:3001"; */
-axios.defaults.baseURL = "https://back-pi-dogs-alpha.vercel.app";
+axios.defaults.baseURL = "https://back-pi-dogs-kappa.vercel.app";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
