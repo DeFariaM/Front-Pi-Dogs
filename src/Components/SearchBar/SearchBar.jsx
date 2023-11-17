@@ -42,7 +42,7 @@ const SearchBar = ({ setCurrentPage }) => {
         className={input_src}
         type="search"
         value={input}
-        placeholder="Please write a breed!"
+        placeholder="Search a dog breed!"
         onChange={handleChange}
         onKeyDown={handleKey}
       />

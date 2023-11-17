@@ -11,8 +11,12 @@ const NavBar = ({ setCurrentPage, setInputPage }) => {
   const { pathname } = useLocation();
   return (
     <div className={wrapper}>
-      <img src={origami} alt="" className={logo} />
-      <span className={name}>DOGKAHOLIC</span>
+      <NavLink to="/home">
+        <div>
+          <img src={origami} alt="" className={logo} />
+          <span className={name}>DOGKAHOLIC</span>
+        </div>
+      </NavLink>
 
       {pathname === "/home" ? (
         <>
@@ -31,7 +35,7 @@ const NavBar = ({ setCurrentPage, setInputPage }) => {
       ) : null}
       {pathname === "/home" ? (
         <NavLink to="/create" className={link}>
-          <button className={btn}>Create!</button>
+          <button className={btn}>Create</button>
         </NavLink>
       ) : null}
       {pathname !== "/home" ? (
