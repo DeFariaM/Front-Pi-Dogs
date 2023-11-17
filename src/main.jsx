@@ -8,8 +8,7 @@ import { Provider } from "react-redux";
 import "./index.css";
 import axios from "axios";
 
-/* axios.defaults.baseURL = "http://localhost:3001"
- */ axios.defaults.baseURL = "back-pi-dogs-production-8d8d.up.railway.app";
+axios.defaults.baseURL = "http://localhost:3001";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

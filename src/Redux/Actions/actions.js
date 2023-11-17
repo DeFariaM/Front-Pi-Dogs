@@ -96,7 +96,7 @@ export function postDog(dog) {
 
 export function getTemperaments() {
   return async function (dispatch) {
-    const { data } = await axios(`${URL}/temperaments`);
+    const { data } = await axios("/temperaments");
     return dispatch({
       type: GET_TEMPERAMENTS,
       payload: data,
