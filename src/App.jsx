@@ -1,12 +1,13 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import Landing from "./Views/Landing";
-import Home from "./Views/Home";
-import Detail from "./Views/Detail";
-import Create from "./Views/Create";
+import Landing from "./Views/Landing/Landing";
+import Home from "./Views/Home/Home";
+import Detail from "./Views/Detail/Detail";
+import Create from "./Views/Create/Create";
 
 import NavBar from "./Components/NavBar/NavBar";
 
 import { useState } from "react";
+import NotFound from "./Views/404/NotFound";
 
 function App() {
   const { pathname } = useLocation();
@@ -16,7 +17,9 @@ function App() {
   return (
     <>
       <div>
-        {pathname !== "/" ? <NavBar setCurrentPage={setCurrentPage} /> : null}
+        {pathname !== "/" ? (
+          <NavBar setCurrentPage={setCurrentPage} setInputPage={setInputPage} />
+        ) : null}
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route
@@ -31,6 +34,7 @@ function App() {
             }></Route>
           <Route path="/detail/:id" element={<Detail />}></Route>
           <Route path="/create" element={<Create />}></Route>
+          <Route path="/*" element={<NotFound message={"Page"} />}></Route>
         </Routes>
       </div>
     </>
