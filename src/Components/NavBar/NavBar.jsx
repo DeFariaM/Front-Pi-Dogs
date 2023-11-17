@@ -2,21 +2,36 @@ import React from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import { NavLink, useLocation } from "react-router-dom";
 import style from "./NavBar.module.css";
-const { wrapper, btn, link, logo, name } = style;
+const { wrapper, btn, link, logo, name, wrap_filters } = style;
 import origami from "../../assets/dog-origami.svg";
+import Order from "../Order/Order";
+import Filter from "../Filter/Filter";
 
-const NavBar = ({ setCurrentPage }) => {
+const NavBar = ({ setCurrentPage, setInputPage }) => {
   const { pathname } = useLocation();
   return (
     <div className={wrapper}>
       <img src={origami} alt="" className={logo} />
       <span className={name}>DOGKAHOLIC</span>
+
       {pathname === "/home" ? (
-        <SearchBar setCurrentPage={setCurrentPage} />
+        <>
+          <div className={wrap_filters}>
+            <Order
+              setCurrentPage={setCurrentPage}
+              setInputPage={setInputPage}
+            />
+            <Filter
+              setCurrentPage={setCurrentPage}
+              setInputPage={setInputPage}
+            />
+          </div>
+          <SearchBar setCurrentPage={setCurrentPage} />
+        </>
       ) : null}
       {pathname === "/home" ? (
         <NavLink to="/create" className={link}>
-          <button className={btn}>Create your own dog</button>
+          <button className={btn}>Create!</button>
         </NavLink>
       ) : null}
       {pathname !== "/home" ? (
