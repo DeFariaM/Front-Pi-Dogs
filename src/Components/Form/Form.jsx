@@ -41,7 +41,6 @@ const Form = () => {
     life_span: "",
     temperament: [],
   });
-  console.log(input);
 
   const [error, setError] = useState({
     name: "This can't be empty",
