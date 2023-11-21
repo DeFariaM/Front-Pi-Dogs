@@ -93,7 +93,7 @@ button:disabled {
   margin: 1rem;
 }
 
-.contenedorCountry {
+.contenedorTemp {
   width: auto;
   height: 40px;
   display: flex;
@@ -133,7 +133,7 @@ button:disabled {
   -moz-box-shadow: -6px 8px 12px -11px rgba(0, 0, 0, 0.77);
 }
 
-.contenedorC {
+.contenedorT {
   display: flex;
   /* max-width: 5rem; */
   flex-direction: row;

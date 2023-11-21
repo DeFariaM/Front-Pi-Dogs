@@ -18,8 +18,8 @@ const {
   input_image,
   formulario,
   label,
-  contenedorCountry,
-  contenedorC,
+  contenedorTemp,
+  contenedorT,
   contenedorFormulario,
 } = style;
 
@@ -226,11 +226,11 @@ const Form = () => {
             })}
           </select>
 
-          <div className={contenedorC}>
+          <div className={contenedorT}>
             {input.temperament?.map((temp, index) => {
               return (
                 <div key={index}>
-                  <div className={contenedorCountry}>
+                  <div className={contenedorTemp}>
                     <button
                       className={buttonClose}
                       value={temp}
