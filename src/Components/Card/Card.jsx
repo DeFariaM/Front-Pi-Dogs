@@ -14,13 +14,17 @@ const Card = ({ dog }) => {
           <img src={dog.image} alt="" className={img_dog} />
         </div>
         <div className={divTemp}>
-          {temp?.map((t, index) => {
-            return (
-              <p className={tempSpan} key={index}>
-                {t}
-              </p>
-            );
-          })}
+          {temp.length ? (
+            temp.map((t, index) => {
+              return (
+                <p className={tempSpan} key={index}>
+                  {t}
+                </p>
+              );
+            })
+          ) : (
+            <p className={tempSpan}>No registered temperaments</p>
+          )}
         </div>
 
         <h4>
