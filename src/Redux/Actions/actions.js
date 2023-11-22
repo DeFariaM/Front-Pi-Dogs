@@ -84,8 +84,6 @@ export function postDog(dog) {
         payload: data,
       });
     } catch (error) {
-      console.log(error);
-
       return dispatch({
         type: "Error",
         payload: error.response.data,
