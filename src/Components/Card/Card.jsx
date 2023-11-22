@@ -14,7 +14,7 @@ const Card = ({ dog }) => {
           <img src={dog.image} alt="" className={img_dog} />
         </div>
         <div className={divTemp}>
-          {temp.length ? (
+          {temp.length > 0 ? (
             temp.map((t, index) => {
               return (
                 <p className={tempSpan} key={index}>
