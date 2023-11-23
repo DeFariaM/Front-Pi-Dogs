@@ -32,8 +32,7 @@ const Cards = ({
     }
     if (inputPage > totalPages) {
       alert(`We're sorry, but we only have ${totalPages} pages`);
-      setInputPage(1);
-      setCurrentPage(1);
+      setInputPage(currentPage);
       return;
     }
     setCurrentPage(inputPage);
