@@ -28,11 +28,11 @@
 
 .wrap_img {
   width: 600px;
-  height: 400px;
+  height: 460px;
   border-radius: 15px;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
 }
 
