@@ -1,34 +1,48 @@
 .wrap_img {
-  width: 270px;
-  height: 190px;
+  width: 290px;
+  height: 155px;
   border-radius: 15px;
 
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
+  align-items: baseline;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
 .img_dog {
   display: block;
+  position: relative;
   width: 100%;
+  height: auto;
   border-radius: 15px;
   padding: auto;
 }
 .wrapper {
-  text-decoration: none;
-  padding: 6px;
+  /*   text-decoration: none;
   display: flex;
   justify-content: flex-end;
   width: 300px;
   height: 390px;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 10px;*/
+  display: inline-block;
   background-color: #958cfe;
+  width: 320px;
+  margin-left: 3px;
+  margin-right: 3px;
+
+  height: 210px;
+  margin-top: 18px;
+  position: relative;
+  text-align: center;
+  /* white-space: nowrap; */
+  /* text-overflow: ellipsis;
+  overflow: hidden; */
   border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(37, 25, 41, 0.247);
 }
 
 .tempSpan {
@@ -46,11 +60,11 @@
   justify-content: center;
 }
 
-.link,
+/* .link,
 .link:hover {
   color: #fff;
   text-decoration: none;
-}
+} */
 
 .link {
   transition: transform 0.2s;
@@ -58,4 +72,32 @@
 
 .link:hover {
   transform: scale(1.01);
+}
+
+.overlay {
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wrapper:hover .overlay {
+  opacity: 1;
+}
+
+.dog_name {
+  color: #fff;
+  font-size: 17px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
